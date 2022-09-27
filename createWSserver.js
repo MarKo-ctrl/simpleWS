@@ -1,11 +1,11 @@
-const ws = require('ws');
+const { WebSocket } = require('ws');
 
 exports.createWebSocketServer = (server) => {
-  const wss = new ws.Server({ server });
+  const wss = new WebSocket.Server({ server });
 
   wss.on('connection', (webSocket) => {
     webSocket.on('message', (message) => {
-      webSocket.send('message')
+      webSocket.send(message)
     });
   });
 };
