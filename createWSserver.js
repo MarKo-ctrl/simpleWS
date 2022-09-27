@@ -1,7 +1,7 @@
 const ws = require('ws');
 
 exports.createWebSocketServer = (server) => {
-  const wss = new WebSocket.Server({ server });
+  const wss = new ws.Server({ server });
 
   wss.on('connection', (webSocket) => {
     webSocket.on('message', (message) => {
