@@ -9,3 +9,16 @@ exports.serverStart = (port) => {
     server.listen(port, () => resolve(server));
   })
 }
+
+exports.waitSocketState = (socket, state) => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (socket.readyState === state) {
+        resolve();
+      } else {
+        this.waitSocketState(socket, state)
+          .then(resolve);
+      }
+    }, 5)
+  })
+}
