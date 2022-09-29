@@ -26,10 +26,9 @@ exports.waitSocketState = (socket, state) => {
 
 exports.createSocketClient = async (port, closeAfter) => {
   const client = new WebSocket(`ws://localhost:${port}`);
-  await this.waitSocketState(client, client.OPEN);
-
   const messages = [];
-
+  await this.waitSocketState(client, client.OPEN);
+  
   client.on('message', (data) => {
     messages.push(JSON.parse(data));
     messages.length === closeAfter ? client.close() : null;
